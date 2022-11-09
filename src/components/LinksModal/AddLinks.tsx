@@ -45,10 +45,17 @@ export const AddLinks = () => {
             <Box className={styles.linksimage}>
                <Image src={LinksImage} alt="Links Image" />
             </Box>
-            <Flex className={styles.steplinks}>
+            <Flex className={styles.newweblinks}>
+               <IconCustomButton
+                  bg="back"
+                  isDisabled={linkCount === 0}
+                  isHover={true}
+                  Icon={<AddIcon />}
+                  className={styles.iconslink}
+               />
                <IconCustomButton
                   isDisabled={!hasBackLink()}
-                  className={styles.arrow}
+                  className={styles.iconslink}
                   bg="back"
                   aria-label="Move to  a back link"
                   Icon={<ArrowBackIcon />}
@@ -56,7 +63,7 @@ export const AddLinks = () => {
                <IconCustomButton
                   isDisabled={!hasForwardLink()}
                   bg="back"
-                  className={styles.arrow}
+                  className={styles.iconslink}
                   aria-label="Move to next link"
                   Icon={<ArrowForwardIcon />}
                />
@@ -68,14 +75,6 @@ export const AddLinks = () => {
                link={new Website()}
                count={linkCount}
                setNewCount={setLinkCount}
-            />
-
-            <IconCustomButton
-               bg="back"
-               isDisabled={linkCount === 0}
-               isHover={true}
-               Icon={<AddIcon />}
-               className={styles.websitebtn}
             />
          </Flex>
 

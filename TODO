@@ -1,3 +1,5 @@
-- Manage connection errors, dont let do anything before connecting
-- Remember the connection and check when signer is not return because not ready yet
-- show bin icon when image profile is set
+- Show bin icon when image profile is set
+- Add Websites Links
+- When sign and confirm transaction close modal and show a status transaction modal
+- Modal for account infos
+- Remember the connection account enabled

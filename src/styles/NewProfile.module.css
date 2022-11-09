@@ -118,19 +118,12 @@
    margin-top: 14px;
 }
 
-.steplinks {
+.newweblinks {
    gap: 5px;
    justify-content: end;
 }
 
-.arrow {
+.iconslink {
    margin-top: 20px;
    width: 50px;
-}
-
-.websitebtn {
-   margin-left: auto;
-   margin-right: auto;
-   margin-top: 20px;
-   width: 100%;
 }
