@@ -1,0 +1,19 @@
+.logo {
+   position: absolute;
+   width: 230px;
+   margin: 40px;
+   background-color: rgba(15, 15, 15, 0.25);
+}
+
+.connectionbox {
+   position: fixed;
+   bottom: 8px;
+   left: 8px;
+}
+
+.connection {
+   position: fixed;
+   margin: auto;
+   top: 50%;
+   left: 50%;
+}

@@ -1,0 +1,3 @@
+- Manage connection errors, dont let do anything before connecting
+- Remember the connection and check when signer is not return because not ready yet
+- show bin icon when image profile is set
