@@ -1,5 +1,6 @@
 .box {
    height: 100%;
+
    width: 100%;
 }
 
@@ -7,6 +8,17 @@
    flex-direction: column;
    margin: 40px;
    width: 100%;
+}
+
+.background {
+   width: 1000px;
+   height: 100vh;
+}
+
+.image {
+   position: fixed;
+   height: auto;
+   width: auto;
 }
 
 .form {

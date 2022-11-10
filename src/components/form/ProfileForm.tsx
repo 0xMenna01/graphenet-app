@@ -2,10 +2,8 @@ import {
    Stack,
    Flex,
    Box,
-   Text,
    Link,
    useToast,
-   Spinner,
    useDisclosure,
 } from '@chakra-ui/react'
 import { useState } from 'react'

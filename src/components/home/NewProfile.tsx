@@ -1,4 +1,4 @@
-import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 import LogoImage from '../../../public/logo.png'
 import BackgroundImage from '../../../public/mobile.png'
@@ -23,8 +23,13 @@ const NewProfile: NextPage = () => {
          />
          <ProfileForm />
 
-         <Box display={showImage.display} width="900px">
-            <Image priority src={BackgroundImage} alt="Background Image" />
+         <Box display={showImage.display} className={styles.background}>
+            <Image
+               priority
+               src={BackgroundImage}
+               className={styles.image}
+               alt="Background Image"
+            />
          </Box>
       </Flex>
    )
