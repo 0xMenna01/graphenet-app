@@ -1,4 +1,13 @@
-import { Stack, Flex, Box, Text, Link } from '@chakra-ui/react'
+import {
+   Stack,
+   Flex,
+   Box,
+   Text,
+   Link,
+   useToast,
+   Spinner,
+   useDisclosure,
+} from '@chakra-ui/react'
 import { useState } from 'react'
 import { WalletAccount } from '../../wallets/types'
 import { ProfileAvatar } from '../avatar/ProfileAvatar'
@@ -7,7 +16,13 @@ import { InputProfile } from '../input/InputProfile'
 import { SignIn } from '../SignInModal/SignIn'
 import { connectBtn, avatarResponsive, avatarUpload } from './responsive'
 import styles from '../../styles/NewProfile.module.css'
-import { LinksModal } from '../LinksModal/LinksModal'
+import { MainButton } from '../button/MainButton'
+import { useApi } from '../../contexts'
+import { createProfile } from '../../guicontroller/createProfile'
+import { Connection } from '../connection/Connection'
+import { Toast } from '../toast/Toasts'
+import { TransactionModal } from '../transaction-modal/TransactionModal'
+import { TRANSACTION } from '../../model/transaction'
 
 export const ProfileForm = () => {
    const [account, setAccount] = useState<WalletAccount>({} as WalletAccount)
@@ -15,12 +30,62 @@ export const ProfileForm = () => {
    const [profileName, setProfileName] = useState('')
    const [bio, setBio] = useState<string | null>(null)
    const [avatar, setAvatarImage] = useState<File | null>(null)
-   const [check, setInputCheck] = useState(false)
+   const [check, setCheck] = useState(false)
+
+   //Transaction Modal
+   const { isOpen, onOpen, onClose } = useDisclosure()
+   const [transactionStatus, setStatus] = useState(TRANSACTION.INIT)
+   const toast = useToast()
+
+   const { isApiReady, api, substrateApi } = useApi()
 
    const isConnected = account != undefined && JSON.stringify(account) != '{}'
 
+   const isAllowed = () => {
+      return isConnected && profileName != ''
+   }
+
+   const getProfile = async () => {
+      const spaceIds = await api.blockchain.spaceIdsByOwner(account.address)
+      const space = await api.base.findSpace({ id: spaceIds[2] })
+      console.log(space?.content?.about)
+   }
+
+   const getTooltip = () => {
+      if (!isApiReady) {
+         return 'Wait Connection to Subsocial'
+      }
+      if (!isAllowed()) {
+         if (!isConnected) {
+            return 'Connect your Wallet'
+         } else {
+            return 'Enter your Profile Name'
+         }
+      } else {
+         return ''
+      }
+   }
+
+   const handleCreateProfile = async () => {
+      onOpen()
+      if (
+         (await createProfile(
+            api,
+            substrateApi,
+            profileName,
+            account,
+            setStatus,
+            bio,
+            avatar
+         )) == -1
+      ) {
+         setStatus(TRANSACTION.CANCELLED)
+      }
+   }
+
    return (
       <Flex className={styles.container}>
+         <Connection isOpen={!isApiReady} />
          <Box alignSelf="end" display={connectBtn.display}>
             {!isConnected ? <SignIn setAccount={setAccount} /> : <>dummy</>}
          </Box>
@@ -32,7 +97,7 @@ export const ProfileForm = () => {
          >
             <Box className={styles.title}>
                <MainHeading text="Create your Profile" />
-               <SecondHeading text="Choose your profile name and  add your personal links" />
+               <SecondHeading text="Choose your profile name and customize your landing page." />
             </Box>
 
             <Flex
@@ -44,10 +109,6 @@ export const ProfileForm = () => {
                   alignSelf={avatarUpload.alignSelf}
                >
                   <ProfileAvatar src={avatar} setAvatar={setAvatarImage} />
-
-                  <Box className={styles.text}>
-                     <Text>Upload your Avatar</Text>
-                  </Box>
                </Flex>
                <Stack width="100%" spacing={6}>
                   <InputProfile
@@ -65,13 +126,23 @@ export const ProfileForm = () => {
                   />
                </Stack>
             </Flex>
-            <LinksModal
-               connected={isConnected}
-               profile={profileName}
-               account={account}
-               bio={bio}
-               avatar={avatar}
-            />
+
+            <TransactionModal
+               setBaseStatus={setStatus}
+               status={transactionStatus}
+               isTransaction={isOpen}
+               closeTransaction={onClose}
+            >
+               <MainButton
+                  isDisabled={getTooltip() != ''}
+                  textTooltip={getTooltip()}
+                  place="top"
+                  className={styles.create}
+                  bg="linear"
+                  text="Create your Profile"
+                  onClick={handleCreateProfile}
+               />
+            </TransactionModal>
 
             <Link className={styles.link} textDecor="underline" color="main">
                Already have a profile?

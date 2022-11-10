@@ -13,7 +13,7 @@ export const Toast = ({ title }: ToastProps) => {
          width={'auto'}
          height={'auto'}
          p={5}
-         background="card"
+         background="second"
          alignItems="center"
          borderRadius={borderValue}
          gap="25px"

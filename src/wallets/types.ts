@@ -2,6 +2,7 @@ import type { Signer as InjectedSigner } from '@polkadot/api/types'
 import { u128 } from '@polkadot/types'
 import { SubmittableExtrinsic } from '@polkadot/api-base/types/submittable'
 import { ISubmittableResult } from '@polkadot/types/types'
+import { TRANSACTION } from '../model/transaction'
 
 export type SubscriptionFn = (
    accounts: WalletAccount[] | undefined
@@ -57,7 +58,8 @@ interface Signer {
    // Sign function
    sign: (
       tx: SubmittableExtrinsic<'promise', ISubmittableResult>,
-      address: string
+      address: string,
+      setStatus: (status: TRANSACTION) => void
    ) => Promise<undefined | number>
 }
 

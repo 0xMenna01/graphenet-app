@@ -75,7 +75,6 @@ export const LinksModal = ({
       >
          <Connection isOpen={!isApiReady} />
          <MainButton
-            hasTooltip={!isAllowed()}
             place="top"
             textTooltip={
                connected ? 'Enter your profile name' : 'Connect your wallet'
@@ -119,7 +118,6 @@ export const LinksModal = ({
                      />
                   ) : (
                      <MainButton
-                        hasTooltip={!isApiReady}
                         textTooltip="Wait Connection to Subsocial"
                         isDisabled={!isApiReady}
                         padding="20px"

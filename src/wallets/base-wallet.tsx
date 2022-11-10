@@ -9,6 +9,7 @@ import type { Signer as InjectedSigner } from '@polkadot/api/types'
 import { SubscriptionFn, Wallet, WalletAccount } from './types'
 import { SubmittableExtrinsic } from '@polkadot/api-base/types/submittable'
 import { ISubmittableResult } from '@polkadot/types/types'
+import { TRANSACTION } from '../model/transaction'
 
 export class BaseDotsamaWallet implements Wallet {
    extensionName = ''
@@ -134,7 +135,8 @@ export class BaseDotsamaWallet implements Wallet {
 
    sign = async (
       tx: SubmittableExtrinsic<'promise', ISubmittableResult>,
-      address: string
+      address: string,
+      setStatus: (status: TRANSACTION) => void
    ) => {
       if (!this._extension) {
          throw new Error(
@@ -151,14 +153,17 @@ export class BaseDotsamaWallet implements Wallet {
       }
 
       await tx.send((result: any) => {
+         setStatus(TRANSACTION.SENDING)
          const { status } = result
 
          if (status.isFinalized || status.isInBlock) {
             const blockHash = status.isFinalized
                ? status.asFinalized
                : status.asInBlock
+            setStatus(TRANSACTION.FINALIZED)
             console.log('✅ Tx finalized. Block hash', blockHash.toString())
          } else if (result.isError) {
+            setStatus(TRANSACTION.ERROR)
             console.log(JSON.stringify(result))
          } else {
             console.log('⏱ Current tx status:', status.type)

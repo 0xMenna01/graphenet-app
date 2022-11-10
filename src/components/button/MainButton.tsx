@@ -16,7 +16,6 @@ type ButtonProps = {
    isDisabled?: boolean
    onClick?: MouseEventHandler<HTMLButtonElement>
    className?: string
-   hasTooltip?: boolean
    textTooltip?: string
    place?: PlacementWithLogical
 }
@@ -29,13 +28,12 @@ export const MainButton = ({
    onClick,
    isDisabled,
    className,
-   hasTooltip,
    textTooltip,
    place,
 }: ButtonProps) => {
    return (
       <Tooltip
-         isDisabled={!hasTooltip}
+         isDisabled={!isDisabled}
          hasArrow
          placement={place}
          label={textTooltip}
