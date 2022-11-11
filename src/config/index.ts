@@ -1,6 +1,6 @@
 export const config = {
    appName: 'graphenet',
-   substrateNodeUrl: `wss://para.f3joule.space`,
+   substrateNodeUrl: `wss://rco-para.subsocial.network`,
    ipfsUrl: `https://staging.subsocial.network/ipfs`,
    ipfsNodeUrl: `https://crustwebsites.net`,
 }

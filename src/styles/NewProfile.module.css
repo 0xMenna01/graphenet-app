@@ -102,6 +102,10 @@
    width: 40px;
 }
 
+.backarrow {
+   width: 30px;
+}
+
 .linkstitle {
    font-size: 32px;
    font-weight: 900;

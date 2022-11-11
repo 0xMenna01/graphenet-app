@@ -1,16 +1,24 @@
 import { config } from '../../config'
 import { AddLink } from '../../contexts'
 
-export const isBioValid = (input: string): boolean => {
-   return true
-}
-
-export const isUsernameValid = (input: string): boolean => {
-   if (input == '') {
-      return false
-   } else {
-      return true
+export const isInputValid = (input: string, isBio: boolean): boolean => {
+   let min = 2
+   if (isBio) {
+      min = 5
    }
+   const count = input.length
+   let empty = 0
+   if (count > min && input[0] != '') {
+      for (let i = 1; i < count; i++) {
+         if (input[i] == '') {
+            empty++
+         }
+      }
+      if (count - empty > min) {
+         return true
+      }
+   }
+   return false
 }
 
 export const loadImgUrl = (cid: string) => {

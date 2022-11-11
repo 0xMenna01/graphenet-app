@@ -1,4 +1,3 @@
-import { CheckCircleIcon, WarningIcon } from '@chakra-ui/icons'
 import {
    Text,
    Flex,
@@ -9,9 +8,12 @@ import {
    Spinner,
    ModalCloseButton,
 } from '@chakra-ui/react'
+import ErrorIcon from '../../../public/error.png'
+import SuccessIcon from '../../../public/success.png'
 import { ReactNode, useEffect, useState } from 'react'
 
 import { TRANSACTION } from '../../model/transaction'
+import Image from 'next/image'
 
 type TransactionProps = {
    children: ReactNode
@@ -83,13 +85,18 @@ export const TransactionModal = ({
                status == TRANSACTION.CANCELLED ? (
                   <>
                      {status == TRANSACTION.FINALIZED ? (
-                        <CheckCircleIcon marginBottom="20px" />
+                        <Image
+                           src={SuccessIcon}
+                           alt="Success Icon"
+                           width={25}
+                           height={25}
+                        />
                      ) : (
-                        <WarningIcon
-                           width="20px"
-                           height="20px"
-                           color="red.800"
-                           marginBottom="20px"
+                        <Image
+                           src={ErrorIcon}
+                           alt="Error Icon"
+                           width={25}
+                           height={25}
                         />
                      )}
                      <ModalCloseButton opacity="0.5" />
@@ -101,11 +108,11 @@ export const TransactionModal = ({
                      emptyColor="back"
                      color="main"
                      size="md"
-                     marginBottom="20px"
                   />
                )}
 
                <Progress
+                  marginTop="20px"
                   borderRadius="15px"
                   background="second"
                   value={progressValue}

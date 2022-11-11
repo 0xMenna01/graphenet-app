@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import styles from '../../styles/NewProfile.module.css'
 import { Wallet, WalletAccount } from '../../wallets/types'
 import { config } from '../../config'
-import { Box, useToast, Image, Text, color } from '@chakra-ui/react'
+import { Box, useToast, Image, Text } from '@chakra-ui/react'
 import { DownloadIcon } from '@chakra-ui/icons'
 import { Toast } from '../../components/toast/Toasts'
 
@@ -14,9 +14,14 @@ const { appName } = config
 type GetWalletPorps = {
    setAccounts: (accounts: WalletAccount[]) => void
    setCurrentWallet: (walletName: string) => void
+   setStep: (step: number) => void
 }
 
-const WalletList = ({ setAccounts, setCurrentWallet }: GetWalletPorps) => {
+const WalletList = ({
+   setAccounts,
+   setCurrentWallet,
+   setStep,
+}: GetWalletPorps) => {
    const toast = useToast()
    const [unsubscribe, setUnsubscribe] = useState<() => unknown>()
 
@@ -44,6 +49,7 @@ const WalletList = ({ setAccounts, setCurrentWallet }: GetWalletPorps) => {
                   if (accounts) {
                      setAccounts(accounts)
                      setCurrentWallet(wallet.extensionName)
+                     setStep(2)
                   }
                }
             )

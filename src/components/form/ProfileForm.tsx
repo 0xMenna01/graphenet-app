@@ -18,7 +18,6 @@ import { MainButton } from '../button/MainButton'
 import { useApi } from '../../contexts'
 import { createProfile } from '../../guicontroller/createProfile'
 import { Connection } from '../connection/Connection'
-import { Toast } from '../toast/Toasts'
 import { TransactionModal } from '../transaction-modal/TransactionModal'
 import { TRANSACTION } from '../../model/transaction'
 
@@ -43,10 +42,12 @@ export const ProfileForm = () => {
       return isConnected && profileName != ''
    }
 
-   const getProfile = async () => {
+   const setProfile = async () => {
       const spaceIds = await api.blockchain.spaceIdsByOwner(account.address)
-      const space = await api.base.findSpace({ id: spaceIds[2] })
-      console.log(space?.content?.about)
+
+      // const space = await api.base.findSpace({ id: spaceIds[1] })
+      const tx = substrateApi.tx.profiles.setProfile(spaceIds[1])
+      account.wallet?.sign(tx, account.address, setStatus)
    }
 
    const getTooltip = () => {
