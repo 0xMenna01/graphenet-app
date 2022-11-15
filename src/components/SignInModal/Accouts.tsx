@@ -13,9 +13,12 @@ export const Accounts = ({ walletAccounts, setAccount }: AccountsProps) => {
    const accounts = walletAccounts.map((account) => {
       return (
          <Box
+            background="second"
+            margin="7px"
+            padding="30px"
             key={account.address}
             className={styles.wallet}
-            _hover={{ cursor: 'pointer', bgColor: 'second' }}
+            _hover={{ cursor: 'pointer', bgColor: 'hover' }}
             onClick={() => setAccount(account)}
          >
             <Box className={styles.walleticon}>

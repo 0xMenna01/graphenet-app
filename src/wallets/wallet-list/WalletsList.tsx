@@ -74,9 +74,12 @@ const WalletList = ({
 
       return (
          <Box
+            background="second"
+            margin="7px"
+            padding="30px"
             key={title}
             className={styles.wallet}
-            _hover={{ cursor: 'pointer', bgColor: 'second' }}
+            _hover={{ cursor: 'pointer', bgColor: 'hover' }}
             onClick={() => {
                if (!installed) {
                   window.open(installUrl, '_blank')

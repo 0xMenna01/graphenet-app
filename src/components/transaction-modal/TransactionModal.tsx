@@ -102,13 +102,7 @@ export const TransactionModal = ({
                      <ModalCloseButton opacity="0.5" />
                   </>
                ) : (
-                  <Spinner
-                     thickness="2px"
-                     speed="0.65s"
-                     emptyColor="back"
-                     color="main"
-                     size="md"
-                  />
+                  <></>
                )}
 
                <Progress

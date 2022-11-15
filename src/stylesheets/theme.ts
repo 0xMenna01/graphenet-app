@@ -42,6 +42,7 @@ const theme = extendTheme({
    colors: {
       main: '#AA67FF',
       second: '#2B2B2B',
+      hover: '#434343',
       warning: '#B95050',
       linear:
          'linear-gradient(270deg, #AA67FF 0%, rgba(143, 0, 255, 0.8) 100%);',

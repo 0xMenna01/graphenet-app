@@ -1612,7 +1612,7 @@
     "@polkadot/api" latest
     lodash.camelcase "^4.3.0"
 
-"@subsocial/utils@0.7.8-dev.0":
+"@subsocial/utils@0.7.8-dev.0", "@subsocial/utils@^0.7.8-dev.0":
   version "0.7.8-dev.0"
   resolved "https://registry.yarnpkg.com/@subsocial/utils/-/utils-0.7.8-dev.0.tgz#51b87167f815d7e24825e1910715e88af903feef"
   integrity sha512-ps7igm+EV8WMlH+8tvo85Zpr4sE8RXFMKly+Qaiz2pRYX+MQny/+7vQmmYXnDQ+2xZ0OBKxivnjzTqEbIqoyLA==

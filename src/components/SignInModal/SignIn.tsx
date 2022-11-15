@@ -11,7 +11,7 @@ import {
    Flex,
 } from '@chakra-ui/react'
 import styles from '../../styles/NewProfile.module.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MainButton } from '../button/MainButton'
 import { WalletAccount } from '../../wallets/types'
 import type { Signer as InjectedSigner } from '@polkadot/api/types'
@@ -20,7 +20,6 @@ import WalletList, {
 } from '../../wallets/wallet-list/WalletsList'
 import { Accounts } from './Accouts'
 import { ArrowBackIcon } from '@chakra-ui/icons'
-import { IconCustomButton } from '../button/IconCustomButton'
 
 type SignInProps = {
    setAccount: (account: WalletAccount) => void
@@ -77,11 +76,16 @@ export const SignIn = ({ setAccount }: SignInProps) => {
 
    return (
       <>
-         <MainButton onClick={onOpen} bg="linear" text="Connect Wallet" />
+         <MainButton
+            onClick={onOpen}
+            bg="linear"
+            text="Connect"
+            padding="20px"
+         />
 
          <Modal onClose={onClose} isOpen={isOpen}>
             <ModalOverlay />
-            <ModalContent padding="30px">
+            <ModalContent padding="12px">
                {step > 1 ? (
                   <Flex gap="10px" opacity="0.5">
                      <ArrowBackIcon
