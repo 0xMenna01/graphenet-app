@@ -82,7 +82,7 @@ export const ProfileForm = () => {
             {!isConnected ? (
                <SignIn setAccount={setAccount} />
             ) : (
-               <SignedInModal name={account.name} />
+               <SignedInModal name={account.name} setAccount={setAccount} />
             )}
          </Box>
 

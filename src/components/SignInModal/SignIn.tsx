@@ -9,6 +9,7 @@ import {
    ModalCloseButton,
    IconButton,
    Flex,
+   ModalFooter,
 } from '@chakra-ui/react'
 import styles from '../../styles/NewProfile.module.css'
 import { useState } from 'react'
@@ -89,21 +90,18 @@ export const SignIn = ({ setAccount }: SignInProps) => {
                {step > 1 ? (
                   <Flex gap="10px" opacity="0.5">
                      <ArrowBackIcon
-                        w={6}
-                        h={6}
+                        w={8}
+                        h={8}
                         onClick={() => setStep(1)}
                         _hover={{ cursor: 'pointer' }}
                      />
-                     <Text fontSize="16" fontWeight="800">
-                        Back
-                     </Text>
                   </Flex>
                ) : (
                   <></>
                )}
                <ModalHeader>
                   <Text className={styles.modaltitle}>{getText()[0]}</Text>
-                  <Text fontSize="16" fontWeight="800" opacity="0.5">
+                  <Text fontSize="16" fontWeight="800" opacity="0.6">
                      {getText()[1]}
                   </Text>
                </ModalHeader>
@@ -111,7 +109,7 @@ export const SignIn = ({ setAccount }: SignInProps) => {
                <ModalBody>
                   <Step />
                </ModalBody>
-               <ModalCloseButton opacity="0.5" />
+               <ModalCloseButton h={10} w={10} opacity="0.6" />
             </ModalContent>
          </Modal>
       </>

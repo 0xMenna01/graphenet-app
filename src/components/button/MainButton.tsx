@@ -10,6 +10,7 @@ import { MouseEventHandler } from 'react'
 type ButtonProps = {
    text: string
    bg?: string
+   w?: string
    fontSize?: string
    padding?: string
    align?: string
@@ -23,6 +24,7 @@ type ButtonProps = {
 export const MainButton = ({
    text,
    bg,
+   w,
    fontSize,
    padding,
    onClick,
@@ -42,6 +44,7 @@ export const MainButton = ({
       >
          <Button
             className={className}
+            w={w}
             isDisabled={isDisabled}
             variant="outline"
             borderRadius={borderValue}

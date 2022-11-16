@@ -8,31 +8,43 @@ import {
    useDisclosure,
    Box,
    Text,
+   ModalFooter,
+   useClipboard,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import styles from '../../styles/NewProfile.module.css'
 import AccountIcon from '../../../public/account.png'
+import { WalletAccount } from '../../wallets/types'
 import { MainButton } from '../button/MainButton'
+import { useState } from 'react'
+import { Accounts } from '../SignInModal/Accouts'
 
 type SignedAccount = {
    name: string | undefined
+   setAccount: (account: WalletAccount) => void
 }
 
-export const SignedInModal = ({ name }: SignedAccount) => {
+export const SignedInModal = ({ name, setAccount }: SignedAccount) => {
    const { isOpen, onOpen, onClose } = useDisclosure()
+   const { onCopy, value, setValue, hasCopied } = useClipboard('')
+   const [isChange, setIsChange] = useState(false)
+
    return (
       <>
          <Flex
-            padding="5px"
+            padding="6px"
             paddingLeft="12px"
             paddingRight="12px"
             gap="10px"
             justifyContent="space-around"
-            borderWidth="1px"
-            borderColor="hover"
+            borderWidth="2px"
+            borderColor="second"
             alignItems="center"
-            _hover={{ cursor: 'pointer' }}
-            background="second"
+            _hover={{
+               cursor: 'pointer',
+               transform: 'scale(1.05)',
+            }}
+            background="back"
             borderRadius="15px"
             onClick={onOpen}
          >
@@ -43,16 +55,31 @@ export const SignedInModal = ({ name }: SignedAccount) => {
                   className={styles.walleticon}
                />
             </Box>
-            <Text fontSize="16px" opacity="0.5" fontWeight="500">
+            <Text fontSize="16px" opacity="0.6" fontWeight="600">
                {name}
             </Text>
          </Flex>
 
          <Modal onClose={onClose} isOpen={isOpen}>
             <ModalOverlay />
-            <ModalContent padding="20px">
+            <ModalContent>
                <ModalBody></ModalBody>
                <ModalCloseButton opacity="0.5" />
+               {isChange ? <></> : <></>}
+               <ModalFooter display="flex" gap="10px" flexDirection="column">
+                  <MainButton
+                     w="100%"
+                     text="Change Account"
+                     bg="back"
+                     onClick={() => setAccount({} as WalletAccount)}
+                  />
+                  <MainButton
+                     w="100%"
+                     text="Disconnect"
+                     bg="back"
+                     onClick={() => setAccount({} as WalletAccount)}
+                  />
+               </ModalFooter>
             </ModalContent>
          </Modal>
       </>
