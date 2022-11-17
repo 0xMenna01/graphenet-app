@@ -12,19 +12,26 @@ import {
    useClipboard,
 } from '@chakra-ui/react'
 import Image from 'next/image'
-import styles from '../../styles/NewProfile.module.css'
-import AccountIcon from '../../../public/account.png'
-import { WalletAccount } from '../../wallets/types'
-import { MainButton } from '../button/MainButton'
+import styles from '../../../styles/NewProfile.module.css'
+import AccountIcon from '../../../../public/account.png'
+import { WalletAccount } from '../../../wallets/types'
+import { MainButton } from '../../button/MainButton'
 import { useState } from 'react'
-import { Accounts } from '../SignInModal/Accouts'
+import { AccountInfo } from './AccountInfo'
 
 type SignedAccount = {
-   name: string | undefined
+   name?: string
    setAccount: (account: WalletAccount) => void
+   close: () => void
+   setStep: (step: number) => void
 }
 
-export const SignedInModal = ({ name, setAccount }: SignedAccount) => {
+export const SignedInModal = ({
+   name,
+   setAccount,
+   close,
+   setStep,
+}: SignedAccount) => {
    const { isOpen, onOpen, onClose } = useDisclosure()
    const { onCopy, value, setValue, hasCopied } = useClipboard('')
    const [isChange, setIsChange] = useState(false)
@@ -63,21 +70,22 @@ export const SignedInModal = ({ name, setAccount }: SignedAccount) => {
          <Modal onClose={onClose} isOpen={isOpen}>
             <ModalOverlay />
             <ModalContent>
-               <ModalBody></ModalBody>
+               <ModalBody>
+                  <AccountInfo name={name} avatar={AccountIcon} />
+               </ModalBody>
                <ModalCloseButton opacity="0.5" />
-               {isChange ? <></> : <></>}
+
                <ModalFooter display="flex" gap="10px" flexDirection="column">
-                  <MainButton
-                     w="100%"
-                     text="Change Account"
-                     bg="back"
-                     onClick={() => setAccount({} as WalletAccount)}
-                  />
+                  <MainButton w="100%" text="Change Account" bg="back" />
                   <MainButton
                      w="100%"
                      text="Disconnect"
                      bg="back"
-                     onClick={() => setAccount({} as WalletAccount)}
+                     onClick={() => {
+                        close()
+                        setAccount({} as WalletAccount)
+                        setStep(1)
+                     }}
                   />
                </ModalFooter>
             </ModalContent>

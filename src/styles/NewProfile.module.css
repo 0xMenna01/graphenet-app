@@ -106,6 +106,24 @@
    width: 30px;
 }
 
+.accountinfo {
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 15px;
+}
+
+.addressaccount {
+   display: flex;
+   align-items: center;
+   width: 100%;
+   border-radius: 15px;
+   padding: 10px;
+}
+
+.copybtn {
+}
+
 .linkstitle {
    font-size: 32px;
    font-weight: 900;

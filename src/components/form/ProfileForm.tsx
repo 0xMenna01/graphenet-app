@@ -11,7 +11,7 @@ import { WalletAccount } from '../../wallets/types'
 import { ProfileAvatar } from '../avatar/ProfileAvatar'
 import { MainHeading, SecondHeading } from '../heading/Headings'
 import { InputProfile } from '../input/InputProfile'
-import { SignIn } from '../SignInModal/SignIn'
+import { AccountModal } from '../AccountModal/AccountModal'
 import { connectBtn, avatarResponsive, avatarUpload } from './responsive'
 import styles from '../../styles/NewProfile.module.css'
 import { MainButton } from '../button/MainButton'
@@ -20,7 +20,6 @@ import { createProfile } from '../../guicontroller/createProfile'
 import { Connection } from '../connection/Connection'
 import { TransactionModal } from '../transaction-modal/TransactionModal'
 import { TRANSACTION } from '../../model/transaction'
-import { SignedInModal } from '../SignedInModal/SignedInModal'
 
 export const ProfileForm = () => {
    const [account, setAccount] = useState<WalletAccount>({} as WalletAccount)
@@ -79,11 +78,11 @@ export const ProfileForm = () => {
       <Flex className={styles.container}>
          <Connection isOpen={!isApiReady} />
          <Box alignSelf="end" display={connectBtn.display}>
-            {!isConnected ? (
-               <SignIn setAccount={setAccount} />
-            ) : (
-               <SignedInModal name={account.name} setAccount={setAccount} />
-            )}
+            <AccountModal
+               setAccount={setAccount}
+               connected={isConnected}
+               accountName={account.name}
+            />
          </Box>
 
          <Flex
