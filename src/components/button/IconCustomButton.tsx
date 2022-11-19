@@ -1,34 +1,49 @@
-import { AddIcon } from '@chakra-ui/icons'
-import { IconButton } from '@chakra-ui/react'
-import { JSXElementConstructor, ReactElement, ReactNode } from 'react'
+import { Flex, Text } from '@chakra-ui/react'
+import { MouseEventHandler, ReactNode } from 'react'
 
 type AddLinkProps = {
    className?: string
-   Icon: ReactElement<any, string | JSXElementConstructor<any>>
+   text?: string
+   children: ReactNode
    bg: string
    isHover?: boolean
    isDisabled?: boolean
+   onClick?: MouseEventHandler<HTMLDivElement>
 }
 
 export const IconCustomButton = ({
-   className,
-   Icon,
+   text,
+   children,
    bg,
-   isHover,
    isDisabled,
+   onClick,
 }: AddLinkProps) => {
    return (
-      <IconButton
-         className={className}
-         isDisabled={isDisabled}
-         variant="outline"
+      <Flex
+         flexDir="column"
+         gap="7px"
+         alignItems="center"
          borderRadius="15px"
-         border="transparent"
          background={bg}
-         _hover={{ background: isHover ? 'linear' : 'bg' }}
+         _hover={{
+            background: 'linear',
+            cursor: 'pointer',
+            transform: 'scale(1.03)',
+         }}
          _active={{ opacity: '0.8' }}
-         aria-label="Add Link"
-         icon={Icon}
-      />
+         padding="10px"
+         onClick={onClick}
+      >
+         {children}
+         <Text
+            paddingLeft="30px"
+            paddingRight="30px"
+            fontSize="13px"
+            opacity="0.8"
+            fontWeight="600"
+         >
+            {text}
+         </Text>
+      </Flex>
    )
 }

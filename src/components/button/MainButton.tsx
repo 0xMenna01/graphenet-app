@@ -19,6 +19,7 @@ type ButtonProps = {
    className?: string
    textTooltip?: string
    place?: PlacementWithLogical
+   hover?: string
 }
 
 export const MainButton = ({
@@ -32,6 +33,7 @@ export const MainButton = ({
    className,
    textTooltip,
    place,
+   hover,
 }: ButtonProps) => {
    return (
       <Tooltip
@@ -48,12 +50,12 @@ export const MainButton = ({
             isDisabled={isDisabled}
             variant="outline"
             borderRadius={borderValue}
-            border="transparent"
+            border={bg}
             background={bg}
             padding={padding}
             fontSize={fontSize}
             _hover={{
-               background: 'linear',
+               background: !hover ? 'linear' : hover,
             }}
             _active={{ opacity: '0.8' }}
             onClick={onClick}

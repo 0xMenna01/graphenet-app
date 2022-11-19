@@ -10,6 +10,7 @@ import {
    Text,
    ModalFooter,
    useClipboard,
+   Divider,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import styles from '../../../styles/NewProfile.module.css'
@@ -39,20 +40,14 @@ export const SignedInModal = ({
    return (
       <>
          <Flex
-            padding="6px"
-            paddingLeft="12px"
-            paddingRight="12px"
-            gap="10px"
-            justifyContent="space-around"
-            borderWidth="2px"
+            className={styles.accountbtn}
             borderColor="second"
-            alignItems="center"
             _hover={{
                cursor: 'pointer',
+               borderColor: 'main',
                transform: 'scale(1.05)',
             }}
             background="back"
-            borderRadius="15px"
             onClick={onOpen}
          >
             <Box className={styles.walleticon}>
@@ -75,12 +70,19 @@ export const SignedInModal = ({
                </ModalBody>
                <ModalCloseButton opacity="0.5" />
 
-               <ModalFooter display="flex" gap="10px" flexDirection="column">
-                  <MainButton w="100%" text="Change Account" bg="back" />
+               <ModalFooter display="flex" gap="12px" flexDirection="column">
+                  <Divider margin="10px" />
+                  <MainButton
+                     w="100%"
+                     text="Change Account"
+                     bg="second"
+                     hover="hover"
+                  />
                   <MainButton
                      w="100%"
                      text="Disconnect"
-                     bg="back"
+                     bg="second"
+                     hover="hover"
                      onClick={() => {
                         close()
                         setAccount({} as WalletAccount)
