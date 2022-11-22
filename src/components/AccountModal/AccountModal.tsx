@@ -7,9 +7,7 @@ import {
    useDisclosure,
    Text,
    ModalCloseButton,
-   IconButton,
    Flex,
-   ModalFooter,
 } from '@chakra-ui/react'
 import styles from '../../styles/NewProfile.module.css'
 import { useState } from 'react'
@@ -22,17 +20,18 @@ import WalletList, {
 import { Accounts } from './Accouts'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { SignedInModal } from './signed-in/SignedInModal'
+import { AccountInfo } from './signed-in/AccountInfo'
 
 type AccountModalProps = {
    connected: boolean
-   accountName: string | undefined
+   account: WalletAccount
    setAccount: (account: WalletAccount) => void
 }
 
 export const AccountModal = ({
    setAccount,
    connected,
-   accountName,
+   account,
 }: AccountModalProps) => {
    const { isOpen, onOpen, onClose } = useDisclosure()
    const [step, setStep] = useState(1)
@@ -47,6 +46,7 @@ export const AccountModal = ({
             return ['Select your account', 'Choose one of your accounts']
          }
          case 3: {
+            //Energy or Tokens
             return []
          }
 
@@ -85,7 +85,8 @@ export const AccountModal = ({
    if (connected) {
       return (
          <SignedInModal
-            name={accountName}
+            account={account}
+            accounts={accounts}
             close={onClose}
             setAccount={setAccount}
             setStep={setStep}
@@ -117,10 +118,18 @@ export const AccountModal = ({
                      <></>
                   )}
                   <ModalHeader>
-                     <Text className={styles.modaltitle}>{getText()[0]}</Text>
-                     <Text fontSize="16" fontWeight="800" opacity="0.6">
-                        {getText()[1]}
-                     </Text>
+                     {step != 4 ? (
+                        <>
+                           <Text className={styles.modaltitle}>
+                              {getText()[0]}
+                           </Text>
+                           <Text fontSize="16" fontWeight="800" opacity="0.6">
+                              {getText()[1]}
+                           </Text>
+                        </>
+                     ) : (
+                        <></>
+                     )}
                   </ModalHeader>
 
                   <ModalBody>

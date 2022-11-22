@@ -81,7 +81,7 @@ export const ProfileForm = () => {
             <AccountModal
                setAccount={setAccount}
                connected={isConnected}
-               accountName={account.name}
+               account={account}
             />
          </Box>
 

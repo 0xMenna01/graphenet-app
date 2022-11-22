@@ -1,21 +1,17 @@
-import { Avatar, Flex, Box, Text, Grid, GridItem } from '@chakra-ui/react'
+import { Avatar, Flex, Box, Text, useClipboard } from '@chakra-ui/react'
 import styles from '../../../styles/NewProfile.module.css'
 import Image, { StaticImageData } from 'next/image'
 import { CheckIcon, CopyIcon } from '@chakra-ui/icons'
 import { IconCustomButton } from '../../button/IconCustomButton'
-import { useState } from 'react'
 
 type AccountInfoProps = {
    avatar: StaticImageData
+   address: string
    name?: string
 }
 
-export const AccountInfo = ({ avatar, name }: AccountInfoProps) => {
-   const [isCopied, setIsCopied] = useState(false)
-
-   const uncheck = () => {
-      setIsCopied(false)
-   }
+export const AccountInfo = ({ address, avatar, name }: AccountInfoProps) => {
+   const { onCopy, value, setValue, hasCopied } = useClipboard('')
 
    return (
       <Flex className={styles.accountinfo}>
@@ -28,14 +24,14 @@ export const AccountInfo = ({ avatar, name }: AccountInfoProps) => {
                {name}
             </Text>
             <IconCustomButton
-               text={isCopied ? 'Address copied!' : 'Copy address'}
+               text={hasCopied ? 'Address copied!' : 'Copy address'}
                bg="back"
                onClick={() => {
-                  setIsCopied(true)
-                  setTimeout(uncheck, 2500)
+                  setValue(address)
+                  onCopy()
                }}
             >
-               {isCopied ? <CheckIcon /> : <CopyIcon />}
+               {hasCopied ? <CheckIcon /> : <CopyIcon />}
             </IconCustomButton>
          </Box>
       </Flex>

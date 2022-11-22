@@ -17,25 +17,25 @@ import styles from '../../../styles/NewProfile.module.css'
 import AccountIcon from '../../../../public/account.png'
 import { WalletAccount } from '../../../wallets/types'
 import { MainButton } from '../../button/MainButton'
-import { useState } from 'react'
 import { AccountInfo } from './AccountInfo'
 
 type SignedAccount = {
-   name?: string
+   account: WalletAccount
+   accounts: WalletAccount[]
    setAccount: (account: WalletAccount) => void
    close: () => void
    setStep: (step: number) => void
 }
 
 export const SignedInModal = ({
-   name,
+   account,
+   accounts,
    setAccount,
    close,
    setStep,
 }: SignedAccount) => {
    const { isOpen, onOpen, onClose } = useDisclosure()
    const { onCopy, value, setValue, hasCopied } = useClipboard('')
-   const [isChange, setIsChange] = useState(false)
 
    return (
       <>
@@ -53,12 +53,12 @@ export const SignedInModal = ({
             <Box className={styles.walleticon}>
                <Image
                   src={AccountIcon}
-                  alt={name + ' Account'}
+                  alt={account.name + ' Account'}
                   className={styles.walleticon}
                />
             </Box>
             <Text fontSize="16px" opacity="0.6" fontWeight="600">
-               {name}
+               {account.name}
             </Text>
          </Flex>
 
@@ -66,18 +66,28 @@ export const SignedInModal = ({
             <ModalOverlay />
             <ModalContent>
                <ModalBody>
-                  <AccountInfo name={name} avatar={AccountIcon} />
+                  <AccountInfo
+                     address={account.address}
+                     name={account.name}
+                     avatar={AccountIcon}
+                  />
                </ModalBody>
                <ModalCloseButton opacity="0.5" />
 
                <ModalFooter display="flex" gap="12px" flexDirection="column">
                   <Divider margin="10px" />
+
                   <MainButton
                      w="100%"
                      text="Change Account"
                      bg="second"
                      hover="hover"
+                     onClick={() => {
+                        setAccount({} as WalletAccount)
+                        setStep(2)
+                     }}
                   />
+
                   <MainButton
                      w="100%"
                      text="Disconnect"
