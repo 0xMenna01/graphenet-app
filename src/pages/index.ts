@@ -1,6 +1,6 @@
-import NewProfile from '../components/home/NewProfile'
+import HomePage from '../components/home/HomePage'
 
-export default NewProfile
+export default HomePage
 
 export async function getServerSideProps({ query }: any) {
    if (query.tab) {

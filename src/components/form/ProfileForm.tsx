@@ -6,7 +6,7 @@ import {
    useToast,
    useDisclosure,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { WalletAccount } from '../../wallets/types'
 import { ProfileAvatar } from '../avatar/ProfileAvatar'
 import { MainHeading, SecondHeading } from '../heading/Headings'
@@ -15,14 +15,16 @@ import { AccountModal } from '../AccountModal/AccountModal'
 import { connectBtn, avatarResponsive, avatarUpload } from './responsive'
 import styles from '../../styles/NewProfile.module.css'
 import { MainButton } from '../button/MainButton'
-import { useApi } from '../../contexts'
+import { useAccount, useApi } from '../../contexts'
 import { createProfile } from '../../guicontroller/createProfile'
 import { Connection } from '../connection/Connection'
 import { TransactionModal } from '../transaction-modal/TransactionModal'
 import { TRANSACTION } from '../../model/transaction'
+import { useRouter } from 'next/router'
 
 export const ProfileForm = () => {
-   const [account, setAccount] = useState<WalletAccount>({} as WalletAccount)
+   const router = useRouter()
+   const { isConnected, account, setAccount } = useAccount()
 
    const [profileName, setProfileName] = useState('')
    const [bio, setBio] = useState<string | null>(null)
@@ -36,7 +38,11 @@ export const ProfileForm = () => {
 
    const { isApiReady, api, substrateApi } = useApi()
 
-   const isConnected = account != undefined && JSON.stringify(account) != '{}'
+   useEffect(() => {
+      if (transactionStatus === TRANSACTION.FINALIZED) {
+         router.push('/')
+      }
+   }, [transactionStatus])
 
    const isAllowed = () => {
       return isConnected && profileName != ''
@@ -139,7 +145,12 @@ export const ProfileForm = () => {
                />
             </TransactionModal>
 
-            <Link className={styles.link} textDecor="underline" color="main">
+            <Link
+               className={styles.link}
+               textDecor="underline"
+               color="main"
+               onClick={() => router.push('/')}
+            >
                Already have a profile?
             </Link>
          </Flex>

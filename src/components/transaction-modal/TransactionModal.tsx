@@ -5,7 +5,6 @@ import {
    ModalContent,
    ModalOverlay,
    Progress,
-   Spinner,
    ModalCloseButton,
 } from '@chakra-ui/react'
 import ErrorIcon from '../../../public/error.png'

@@ -1,0 +1,22 @@
+.pagebox {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 100vh;
+}
+
+.accountbox {
+   margin-top: 30px;
+}
+
+.accountinfo {
+   width: 350px;
+   height: auto;
+   flex-direction: column;
+   border-width: 2px;
+   border-color: transparent;
+   border-radius: 15px;
+   margin-top: 200px;
+   align-items: center;
+   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}

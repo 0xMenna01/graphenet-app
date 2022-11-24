@@ -23,6 +23,7 @@ export interface WalletAccount {
    signer?: unknown
    subBalance?: u128
    ksmBalance?: u128
+   shidenBalance?: u128
 }
 
 interface WalletData {
