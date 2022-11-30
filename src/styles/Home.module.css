@@ -1,12 +1,15 @@
 .pagebox {
    display: flex;
-   flex-direction: column;
-   align-items: center;
+   width: 100%;
    height: 100vh;
+   align-items: center;
+   justify-content: space-around;
 }
 
-.accountbox {
-   margin-top: 30px;
+.text {
+   position: absolute;
+   top: 40px;
+   left: 40px;
 }
 
 .accountinfo {
@@ -16,7 +19,34 @@
    border-width: 2px;
    border-color: transparent;
    border-radius: 15px;
-   margin-top: 200px;
    align-items: center;
    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.backbtn {
+   position: absolute;
+   bottom: 40px;
+   left: 40px;
+}
+
+.linksbox {
+   flex-direction: column;
+   padding: 40px;
+   border-radius: 15px;
+   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.iconlinks {
+   justify-content: space-between;
+   padding: 10px;
+   border-width: 2px;
+   border-color: transparent;
+   border-radius: 15px;
+}
+
+.iconbox {
+   border-radius: 15px;
+   margin-left: 20px;
+   margin-right: 20px;
+   padding: 10px;
 }

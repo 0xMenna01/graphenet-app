@@ -1,5 +1,7 @@
 import { config } from '../../config'
 import { AddLink } from '../../contexts'
+import { BaseLink } from '../links/BaseLink'
+import { supportedLinks } from '../links/supportedLinks'
 
 export const isInputValid = (input: string, isBio: boolean): boolean => {
    let min = 2
@@ -68,4 +70,13 @@ export function removeIfExists(
       }
    }
    return currentLinks
+}
+
+export function srcLink(name: string): BaseLink {
+   for (const element of supportedLinks) {
+      if (name === element.name) {
+         return element
+      }
+   }
+   throw new Error('Link' + name + 'is not supported as icon')
 }
