@@ -23,6 +23,8 @@ export const isInputValid = (input: string, isBio: boolean): boolean => {
    return false
 }
 
+//IPFS Gateway
+
 export const loadImgUrl = (cid: string) => {
    return cid ? `${config.ipfsNodeUrl}/ipfs/${cid}` : ''
 }

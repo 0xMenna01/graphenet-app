@@ -8,8 +8,8 @@ export const AccountCard = () => {
          className={styles.accountinfo}
          _hover={{
             borderColor: 'main',
+            borderWidth: '2px',
             transform: 'scale(1.03)',
-            cursor: 'pointer',
          }}
       >
          <Avatar marginTop="20px" size="xl" src="/account.png" />

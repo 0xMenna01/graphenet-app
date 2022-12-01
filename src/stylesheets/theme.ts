@@ -9,7 +9,7 @@ const baseStyle = definePartsStyle({
    dialog: {
       borderRadius: '15px',
       boxShadow: 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;',
-      bg: 'linear-gradient(270deg, #151515 0%, #212121 100%)',
+      bg: 'card',
       padding: '10px',
    },
 })
@@ -28,7 +28,7 @@ const theme = extendTheme({
             color: 'white',
             backgroundColor: '#0F0F0F',
             fontSize: '16px',
-            fontWeight: '300',
+            fontWeight: '400',
          },
          '*': {
             boxSizing: 'border-box',
@@ -46,12 +46,11 @@ const theme = extendTheme({
       linear:
          'linear-gradient(270deg, #AA67FF 0%, rgba(143, 0, 255, 0.8) 100%);',
       back: '#0F0F0F',
-      card: 'linear-gradient(270deg, #151515 0%, #212121 100%)',
+      card: 'linear-gradient(270.43deg, #0F0F0F 0.38%, #161616 99.64%)',
    },
    fonts: {
-      html: `'Inter', sans-serif`,
-      body: `'Inter', sans-serif`,
       heading: `'Inter', sans-serif`,
+      body: `'Inter', sans-serif`,
    },
    breakpoints: {
       sm: '40em',

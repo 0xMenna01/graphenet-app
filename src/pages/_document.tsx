@@ -14,13 +14,8 @@ class MyDocument extends Document {
 
    render() {
       return (
-         <Html>
-            <Head>
-               <style>
-                  @import
-                  url(`https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap`);
-               </style>
-            </Head>
+         <Html lang="en">
+            <Head />
             <body>
                <Main />
                <NextScript />

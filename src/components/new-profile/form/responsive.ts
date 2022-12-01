@@ -1,4 +1,4 @@
-import { ResponsiveContainer } from '../../responsive/responsive'
+import { ResponsiveContainer } from '../../../responsive/responsive'
 
 export const avatarResponsive: ResponsiveContainer = {
    direction: ['column', 'column', 'row'],

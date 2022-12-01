@@ -1,0 +1,10 @@
+.navbar {
+   gap: 15px;
+   padding: 10px;
+   border-radius: 15px;
+}
+
+.textnav {
+   border-width: 700px;
+   font-size: 18px;
+}

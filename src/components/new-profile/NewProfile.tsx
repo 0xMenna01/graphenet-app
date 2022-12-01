@@ -5,7 +5,7 @@ import BackgroundImage from '../../../public/mobile.png'
 import type { NextPage } from 'next'
 import styles from '../../styles/NewProfile.module.css'
 import styleslogo from '../../styles/App.module.css'
-import { ProfileForm } from '../form/ProfileForm'
+import { ProfileForm } from './form/ProfileForm'
 import { ImageResponsive } from '../../responsive/responsive'
 
 const NewProfile: NextPage = () => {

@@ -1,8 +1,8 @@
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Input, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import styles from '../../styles/NewProfile.module.css'
-import { borderValue } from '../../stylesheets/theme'
+import styles from '../../../styles/NewProfile.module.css'
+import { borderValue } from '../../../stylesheets/theme'
 
 type AvatarProps = {
    src?: any
