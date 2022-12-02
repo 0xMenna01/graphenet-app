@@ -1,4 +1,4 @@
-import { BaseLink } from '../BaseLink'
+import { BaseLink } from '../BaseLink2'
 import DiscordImage from '../../../../../public/socials/discord.svg'
 
 export class Discord implements BaseLink {

@@ -1,4 +1,4 @@
-import { BaseLink } from '../BaseLink'
+import { BaseLink } from '../BaseLink2'
 import GithubImage from '../../../../../public/socials/github.svg'
 
 export class Github implements BaseLink {

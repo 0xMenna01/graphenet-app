@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { AddLink, LinksContext } from '../../../contexts'
 import { getNewLinks, removeIfExists } from '../../utils'
-import { BaseLink } from './BaseLink'
+import { BaseLink } from './BaseLink2'
 
 export type NewLinkProps = {
    link: BaseLink
@@ -51,7 +51,6 @@ export const NewLink = ({
          <InputGroup>
             {isSupported && (
                <InputLeftAddon
-                  fontWeight="500"
                   color="main"
                   backgroundColor="back"
                   padding="25px"

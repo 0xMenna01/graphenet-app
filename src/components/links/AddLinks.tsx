@@ -9,6 +9,7 @@ import LinksImage from '../../../public/newlink.png'
 import { NewLinksForm } from './links-form/NewLinksForm'
 import { Website } from './links-form/supportedLinks/Website'
 import { LinksContext } from '../../contexts'
+import { MainButton } from '../button/MainButton'
 
 type AddLinksProps = {
    isClosedModal: boolean
@@ -35,46 +36,18 @@ export const AddLinks = () => {
       return stepLink < linkCount
    }
 
-   useEffect(() => {
-      console.log(linkCount)
-   }, [linkCount])
-
    return (
       <Flex>
-         <Flex flexDir="column" padding="20px">
+         <Flex flexDir="column" marginRight="20px">
             <Box className={styles.linksimage}>
-               <Image src={LinksImage} alt="Links Image" />
+               <Image priority src={LinksImage} alt="Links Image" />
             </Box>
-            <Flex className={styles.newweblinks}>
-               <IconCustomButton
-                  bg="back"
-                  isDisabled={linkCount === 0}
-                  isHover={true}
-                  Icon={<AddIcon />}
-                  className={styles.iconslink}
-               />
-               <IconCustomButton
-                  isDisabled={!hasBackLink()}
-                  className={styles.iconslink}
-                  bg="back"
-                  aria-label="Move to  a back link"
-                  Icon={<ArrowBackIcon />}
-               />
-               <IconCustomButton
-                  isDisabled={!hasForwardLink()}
-                  bg="back"
-                  className={styles.iconslink}
-                  aria-label="Move to next link"
-                  Icon={<ArrowForwardIcon />}
-               />
-            </Flex>
+            <Flex className={styles.newweblinks}></Flex>
 
-            <NewLink
-               className={styles.websitelink}
-               isSupported={false}
-               link={new Website()}
-               count={linkCount}
-               setNewCount={setLinkCount}
+            <MainButton
+               className={styles.newlink}
+               bg="linear"
+               text="Custom Link"
             />
          </Flex>
 

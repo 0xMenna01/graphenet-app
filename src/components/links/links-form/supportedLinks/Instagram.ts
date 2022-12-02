@@ -1,4 +1,4 @@
-import { BaseLink } from '../BaseLink'
+import { BaseLink } from '../BaseLink2'
 import InstagramImage from '../../../../../public/socials/instagram.svg'
 
 export class Instagram implements BaseLink {

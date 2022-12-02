@@ -1,18 +1,23 @@
 import Image from 'next/image'
 import LogoImage from '../../../public/logo.png'
 import type { NextPage } from 'next'
-import styleslogo from '../../styles/App.module.css'
+import styles from '../../styles/Home.module.css'
 import { useAccount } from '../../contexts'
 import { ProfileSettings } from './ProfileSettings'
-import { LinksModal } from '../LinksModal/LinksModal'
+import { ManageLinksCard } from '../links/card/ManageLinksCard'
+import { Flex } from '@chakra-ui/react'
+import { Navbar } from '../navbar/Navbar'
 
 const HomePage: NextPage = () => {
    const { isConnected, account, setAccount } = useAccount()
 
+   const navBarElems = ['Manage Links', 'Styles', 'Domains']
+
    return (
-      <>
-         <ProfileSettings />
-      </>
+      <Flex className={styles.page}>
+         <Navbar position={0} elems={navBarElems} />
+         <ManageLinksCard />
+      </Flex>
    )
 }
 

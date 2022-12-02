@@ -1,6 +1,8 @@
-import { extendTheme } from '@chakra-ui/react'
+import { defineStyleConfig, extendTheme } from '@chakra-ui/react'
 import { modalAnatomy as parts } from '@chakra-ui/anatomy'
 import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
+
+export const shadow = 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;'
 
 const { definePartsStyle, defineMultiStyleConfig } =
    createMultiStyleConfigHelpers(parts.keys)
@@ -8,7 +10,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const baseStyle = definePartsStyle({
    dialog: {
       borderRadius: '15px',
-      boxShadow: 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;',
+      boxShadow: shadow,
       bg: 'card',
       padding: '10px',
    },
@@ -28,13 +30,22 @@ const theme = extendTheme({
             color: 'white',
             backgroundColor: '#0F0F0F',
             fontSize: '16px',
-            fontWeight: '400',
+            fontWeight: '500',
          },
          '*': {
             boxSizing: 'border-box',
          },
          '::selection': {
             background: '#AA67FF',
+         },
+         '&::-webkit-scrollbar': {
+            width: '8px',
+            borderRadius: '15px',
+            backgroundColor: 'second',
+         },
+         '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'main',
+            borderRadius: '15px',
          },
       },
    },
