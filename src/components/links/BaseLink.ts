@@ -8,4 +8,5 @@ export interface BaseLink {
 export interface IconSrc {
    white: any
    black: any
+   main: any
 }

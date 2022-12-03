@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { AddLink, LinksContext } from '../../../contexts'
 import { getNewLinks, removeIfExists } from '../../utils'
-import { BaseLink } from './BaseLink2'
+import { BaseLink } from '../BaseLink'
 
 export type NewLinkProps = {
    link: BaseLink
@@ -47,7 +47,7 @@ export const NewLink = ({
 
    return (
       <Flex gap="15px" className={className}>
-         <Image src={link.icon} alt={link.alt} />
+         <Image priority src={link.icon.main} alt={link.alt} />
          <InputGroup>
             {isSupported && (
                <InputLeftAddon

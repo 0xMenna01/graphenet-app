@@ -45,7 +45,7 @@ export const SignedInModal = ({
             _hover={{
                cursor: 'pointer',
                borderColor: 'main',
-               transform: 'scale(1.05)',
+               transform: 'scale(1.06)',
             }}
             background="back"
             onClick={onOpen}

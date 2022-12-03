@@ -15,7 +15,6 @@ const HomePage: NextPage = () => {
 
    return (
       <Flex className={styles.page}>
-         <Navbar position={0} elems={navBarElems} />
          <ManageLinksCard />
       </Flex>
    )

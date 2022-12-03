@@ -1,24 +1,15 @@
 import { NextPage } from 'next'
 import { Box, Flex, Text } from '@chakra-ui/react'
-import styleslogo from '../styles/App.module.css'
 
 import styles from '../styles/404.module.css'
 import { MainButton } from '../components/button/MainButton'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
-import LogoImage from '../../public/logo.png'
 
 const ErrorNotFound: NextPage = () => {
    const router = useRouter()
 
    return (
       <Flex justifyContent="center">
-         <Image
-            priority
-            src={LogoImage}
-            alt="Graphenet Logo"
-            className={styles.logo}
-         />
          <Box className={styles.message}>
             <Text fontWeight="800" fontSize="45">
                Page Not Found

@@ -7,7 +7,7 @@ import { NewLink } from './links-form/NewLink'
 import Image from 'next/image'
 import LinksImage from '../../../public/newlink.png'
 import { NewLinksForm } from './links-form/NewLinksForm'
-import { Website } from './links-form/supportedLinks/Website'
+import { Website } from './supportedLinks/Website'
 import { LinksContext } from '../../contexts'
 import { MainButton } from '../button/MainButton'
 

@@ -1,4 +1,6 @@
 - SUB KSM SHIDEN amount info
+- Show if wallet has not been authorized
+- Fix text rendering issue
 - Remember the connection account enabled
 - Filter input user
 - Check energy and sub tokens before transaction

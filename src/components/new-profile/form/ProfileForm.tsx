@@ -12,7 +12,7 @@ import { ProfileAvatar } from '../avatar/ProfileAvatar'
 import { MainHeading, SecondHeading } from '../../heading/Headings'
 import { InputProfile } from '../../input/InputProfile'
 import { AccountModal } from '../../account/AccountModal'
-import { connectBtn, avatarResponsive, avatarUpload } from './responsive'
+import { avatarResponsive, avatarUpload } from './responsive'
 import styles from '../../../styles/NewProfile.module.css'
 import { MainButton } from '../../button/MainButton'
 import { useAccount, useApi } from '../../../contexts'
@@ -82,15 +82,6 @@ export const ProfileForm = () => {
 
    return (
       <Flex className={styles.container}>
-         <Connection isOpen={!isApiReady} />
-         <Box alignSelf="end" display={connectBtn.display}>
-            <AccountModal
-               setAccount={setAccount}
-               connected={isConnected}
-               account={account}
-            />
-         </Box>
-
          <Flex
             width={['auto', 'auto', '680px']}
             className={styles.form}
@@ -149,7 +140,9 @@ export const ProfileForm = () => {
                className={styles.link}
                textDecor="underline"
                color="main"
-               onClick={() => router.push('/')}
+               onClick={() => {
+                  router.push('/')
+               }}
             >
                Already have a profile?
             </Link>
