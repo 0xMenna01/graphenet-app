@@ -37,12 +37,11 @@ export const AddLinks = () => {
    }
 
    return (
-      <Flex>
+      <Flex alignItems="center">
          <Flex flexDir="column" marginRight="20px">
             <Box className={styles.linksimage}>
                <Image priority src={LinksImage} alt="Links Image" />
             </Box>
-            <Flex className={styles.newweblinks}></Flex>
 
             <MainButton
                className={styles.newlink}

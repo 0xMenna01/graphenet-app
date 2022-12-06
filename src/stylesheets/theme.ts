@@ -59,10 +59,6 @@ const theme = extendTheme({
       back: '#0F0F0F',
       card: 'linear-gradient(270.43deg, #0F0F0F 0.38%, #161616 99.64%)',
    },
-   fonts: {
-      heading: `'Inter', sans-serif`,
-      body: `'Inter', sans-serif`,
-   },
    breakpoints: {
       sm: '40em',
       md: '72em',

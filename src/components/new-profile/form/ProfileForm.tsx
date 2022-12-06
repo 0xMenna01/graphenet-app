@@ -7,24 +7,21 @@ import {
    useDisclosure,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { WalletAccount } from '../../../wallets/types'
 import { ProfileAvatar } from '../avatar/ProfileAvatar'
 import { MainHeading, SecondHeading } from '../../heading/Headings'
 import { InputProfile } from '../../input/InputProfile'
-import { AccountModal } from '../../account/AccountModal'
 import { avatarResponsive, avatarUpload } from './responsive'
 import styles from '../../../styles/NewProfile.module.css'
 import { MainButton } from '../../button/MainButton'
 import { useAccount, useApi } from '../../../contexts'
-import { createProfile } from '../../../guicontroller/createProfile'
-import { Connection } from '../../connection/Connection'
+import { createProfile } from '../../../guicontroller/'
 import { TransactionModal } from '../../transaction-modal/TransactionModal'
 import { TRANSACTION } from '../../../model/transaction'
 import { useRouter } from 'next/router'
 
 export const ProfileForm = () => {
    const router = useRouter()
-   const { isConnected, account, setAccount } = useAccount()
+   const { account, setAccount } = useAccount()
 
    const [profileName, setProfileName] = useState('')
    const [bio, setBio] = useState<string | null>(null)
@@ -45,19 +42,15 @@ export const ProfileForm = () => {
    }, [transactionStatus])
 
    const isAllowed = () => {
-      return isConnected && profileName != ''
+      return profileName != ''
    }
 
    const getTooltip = () => {
       if (!isApiReady) {
          return 'Wait Connection to Subsocial'
       }
-      if (!isAllowed()) {
-         if (!isConnected) {
-            return 'Connect your Wallet'
-         } else {
-            return 'Enter your Profile Name'
-         }
+      if (profileName != '') {
+         return 'Enter your profile name'
       } else {
          return ''
       }

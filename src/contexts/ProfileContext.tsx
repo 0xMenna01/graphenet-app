@@ -6,28 +6,20 @@ import { AccountModal } from '../components/account/AccountModal'
 import { WalletAccount } from '../wallets/types'
 import { Connection } from '../components/connection/Connection'
 import { useApi } from './ApiContext'
+import { Space } from '@subsocial/api/types/substrate'
 
 type Props = {
    children: React.ReactNode
 }
 
 type ContextType = {
-   isConnected: boolean
-   isNftOwner: boolean
-   account: WalletAccount
-   setAccount: (account: WalletAccount) => void
+   spaces?: Space[]
+   setSpaces?: (spaces: boolean[]) => void
+   profile?: boolean
+   setProfile?: (profile: boolean) => void
 }
 
-export const AccountContext = createContext<ContextType>({
-   isConnected: false,
-   isNftOwner: false,
-   account: {} as WalletAccount,
-   setAccount: {} as React.Dispatch<React.SetStateAction<WalletAccount>>,
-})
-
-const dummyHasNft = () => {
-   return true
-}
+export const ProfileContext = createContext<ContextType>({})
 
 export const InitProvider = ({ children }: Props) => {
    const [account, setAccount] = useState<WalletAccount>({} as WalletAccount)

@@ -10,7 +10,7 @@ type Props = {
 
 export const Navbar = ({ children }: Props) => {
    const elems = ['Manage Links', 'Styles', 'Domains']
-   const pages = ['/', '/styles', '/domains']
+   const pages = ['/manage-links', '/styles', '/domains']
    const router = useRouter()
 
    return (

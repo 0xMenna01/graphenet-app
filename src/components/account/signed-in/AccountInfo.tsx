@@ -11,7 +11,7 @@ type AccountInfoProps = {
 }
 
 export const AccountInfo = ({ address, avatar, name }: AccountInfoProps) => {
-   const { onCopy, value, setValue, hasCopied } = useClipboard('')
+   const { onCopy, hasCopied } = useClipboard(address)
 
    return (
       <Flex className={styles.accountinfo}>
@@ -26,10 +26,7 @@ export const AccountInfo = ({ address, avatar, name }: AccountInfoProps) => {
             <IconCustomButton
                text={hasCopied ? 'Address copied!' : 'Copy address'}
                bg="back"
-               onClick={() => {
-                  setValue(address)
-                  onCopy()
-               }}
+               onClick={onCopy}
             >
                {hasCopied ? <CheckIcon /> : <CopyIcon />}
             </IconCustomButton>

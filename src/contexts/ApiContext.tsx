@@ -10,7 +10,7 @@ type Props = {
    children: React.ReactNode
 }
 
-export type ContextType = {
+type ContextType = {
    isApiReady: boolean
    api: SubsocialApi
    substrateApi: ApiPromise

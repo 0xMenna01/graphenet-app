@@ -49,7 +49,7 @@ const WalletList = ({
                   if (accounts) {
                      setAccounts(accounts)
                      setCurrentWallet(wallet.extensionName)
-                     setStep(2)
+                     setStep(3)
                   }
                }
             )
