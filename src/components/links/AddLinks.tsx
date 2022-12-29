@@ -8,49 +8,49 @@ import Image from 'next/image'
 import LinksImage from '../../../public/newlink.png'
 import { NewLinksForm } from './links-form/NewLinksForm'
 import { Website } from './supportedLinks/Website'
-import { LinksContext } from '../../contexts'
+import { LinksContext } from '../contexts'
 import { MainButton } from '../button/MainButton'
 
 type AddLinksProps = {
-   isClosedModal: boolean
+    isClosedModal: boolean
 }
 
 export const AddLinks = () => {
-   const [linkCount, setLinkCount] = useState<number>(0)
-   const [stepLink, setStep] = useState<number>(1)
+    const [linkCount, setLinkCount] = useState<number>(0)
+    const [stepLink, setStep] = useState<number>(1)
 
-   const { currentLinks } = useContext(LinksContext)
+    const { currentLinks } = useContext(LinksContext)
 
-   useEffect(() => {
-      if (currentLinks?.length === 0) {
-         setLinkCount(0)
-         setStep(1)
-      }
-   })
+    useEffect(() => {
+        if (currentLinks?.length === 0) {
+            setLinkCount(0)
+            setStep(1)
+        }
+    })
 
-   const hasBackLink = () => {
-      return stepLink > 1
-   }
+    const hasBackLink = () => {
+        return stepLink > 1
+    }
 
-   const hasForwardLink = () => {
-      return stepLink < linkCount
-   }
+    const hasForwardLink = () => {
+        return stepLink < linkCount
+    }
 
-   return (
-      <Flex alignItems="center">
-         <Flex flexDir="column" marginRight="20px">
-            <Box className={styles.linksimage}>
-               <Image priority src={LinksImage} alt="Links Image" />
-            </Box>
+    return (
+        <Flex alignItems="center">
+            <Flex flexDir="column" marginRight="20px">
+                <Box className={styles.linksimage}>
+                    <Image priority src={LinksImage} alt="Links Image" />
+                </Box>
 
-            <MainButton
-               className={styles.newlink}
-               bg="linear"
-               text="Custom Link"
-            />
-         </Flex>
+                <MainButton
+                    className={styles.newlink}
+                    bg="linear"
+                    text="Custom Link"
+                />
+            </Flex>
 
-         <NewLinksForm />
-      </Flex>
-   )
+            <NewLinksForm />
+        </Flex>
+    )
 }

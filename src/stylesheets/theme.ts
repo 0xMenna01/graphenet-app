@@ -39,7 +39,7 @@ const theme = extendTheme({
             background: '#AA67FF',
          },
          '&::-webkit-scrollbar': {
-            width: '8px',
+            width: '6px',
             borderRadius: '15px',
             backgroundColor: 'second',
          },

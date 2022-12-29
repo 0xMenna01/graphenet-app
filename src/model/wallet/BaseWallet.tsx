@@ -6,10 +6,8 @@ import {
    InjectedWindow,
 } from '@polkadot/extension-inject/types'
 import type { Signer as InjectedSigner } from '@polkadot/api/types'
-import { SubscriptionFn, Wallet, WalletAccount } from './types'
-import { SubmittableExtrinsic } from '@polkadot/api-base/types/submittable'
-import { ISubmittableResult } from '@polkadot/types/types'
-import { TRANSACTION } from '../model/transaction'
+import { SubscriptionFn, Wallet, WalletAccount } from '.'
+import WalletAccountLogo from '../../../public/account.png'
 
 export class BaseDotsamaWallet implements Wallet {
    extensionName = ''
@@ -103,6 +101,8 @@ export class BaseDotsamaWallet implements Wallet {
             source: this._extension?.name as string,
             wallet: this,
             signer: this._extension?.signer,
+            image: WalletAccountLogo,
+            subBalance: '',
          }
       })
 
@@ -124,6 +124,8 @@ export class BaseDotsamaWallet implements Wallet {
                   // Added extra fields here for convenience
                   wallet: this,
                   signer: this._extension?.signer,
+                  image: WalletAccountLogo,
+                  subBalance: '',
                }
             })
             callback(accountsWithWallet)
@@ -131,43 +133,5 @@ export class BaseDotsamaWallet implements Wallet {
       )
 
       return unsubscribe
-   }
-
-   sign = async (
-      tx: SubmittableExtrinsic<'promise', ISubmittableResult>,
-      address: string,
-      setStatus: (status: TRANSACTION) => void
-   ) => {
-      if (!this._extension) {
-         throw new Error(
-            'The "Wallet.enable(dappname)" function should be called first.'
-         )
-      }
-
-      const { signer } = this._extension
-
-      try {
-         await tx.signAsync(address, { signer })
-      } catch (err) {
-         return -1
-      }
-
-      await tx.send((result: any) => {
-         setStatus(TRANSACTION.SENDING)
-         const { status } = result
-
-         if (status.isFinalized || status.isInBlock) {
-            const blockHash = status.isFinalized
-               ? status.asFinalized
-               : status.asInBlock
-            setStatus(TRANSACTION.FINALIZED)
-            console.log('✅ Tx finalized. Block hash', blockHash.toString())
-         } else if (result.isError) {
-            setStatus(TRANSACTION.ERROR)
-            console.log(JSON.stringify(result))
-         } else {
-            console.log('⏱ Current tx status:', status.type)
-         }
-      })
    }
 }

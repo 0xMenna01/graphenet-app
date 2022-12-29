@@ -83,24 +83,6 @@
    margin-bottom: 10px;
 }
 
-.wallet {
-   display: flex;
-   padding: 30px;
-   align-items: center;
-   height: 50px;
-   width: 100%;
-   border-radius: 15px;
-   font-weight: 700;
-   font-size: 20px;
-   gap: 25px;
-}
-
-.walleticon {
-   display: block;
-   height: 40px;
-   width: 40px;
-}
-
 .backarrow {
    width: 30px;
 }

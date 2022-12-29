@@ -1,66 +1,81 @@
-import { useState } from 'react'
-import { useAccount } from '../../contexts'
-import { WalletAccount } from '../../wallets/types'
-import WalletList, {
-   CURRENT_WALLET,
-} from '../../wallets/wallet-list/WalletsList'
-import { Accounts } from '../account/Accouts'
+import { Box, Progress, space, Spinner } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { useAccount } from '../contexts'
+import { useSpaces } from '../contexts/SpacesContext'
+import { WalletAccount } from '../../model/wallet'
 import { MainButton } from '../button/MainButton'
+import { ListItems } from '../selection-list/ListItems'
+import WalletList from '../wallets/wallet-list/WalletsList'
+import { getSpaces } from '../../guicontroller'
 
 type StepProps = {
-   step: number
-   setStep: (value: number) => void
+    step: number
+    setStep: (value: number) => void
 }
 
 export const LoginStep = ({ step, setStep }: StepProps) => {
-   const [currentWallet, setCurrentWallet] = useState(CURRENT_WALLET)
-   const [accounts, setAccounts] = useState<WalletAccount[]>(
-      {} as WalletAccount[]
-   )
+    const [accounts, setAccounts] = useState<WalletAccount[]>(
+        {} as WalletAccount[]
+    )
+    const { isConnected, account, setAccount } = useAccount()
+    const { spaces, setSpaces } = useSpaces()
+    const [id, setId] = useState(false)
+    const [profile, setProfile] = useState()
 
-   const { isConnected, isNftOwner, account, setAccount } = useAccount()
+    const fetchSpaces = async () => {
+        const spaces = await getSpaces(account.address)
+        setSpaces(spaces)
+        setStep(5)
+    }
 
-   switch (step) {
-      case 2: {
-         // Wallet
-         return (
-            <WalletList
-               setAccounts={setAccounts}
-               setCurrentWallet={setCurrentWallet}
-               setStep={setStep}
-            />
-         )
-      }
-      case 3: {
-         // Account
-         return <Accounts walletAccounts={accounts} setAccount={setAccount} />
-      }
-      case 4: {
-         //Energy or Tokens
-         return <></>
-      }
+    useEffect(() => {
+        if (isConnected) {
+            fetchSpaces()
+        }
+    }, [isConnected])
 
-      case 5: {
-         // Spinner check nft and profile Subsocial
-         return <></>
-      }
+    switch (step) {
+        case 2: {
+            // Wallet
+            return <WalletList setAccounts={setAccounts} setStep={setStep} />
+        }
+        case 3: {
+            // Account
+            return <ListItems list={accounts} setElement={setAccount} />
+        }
+        case 4: {
+            // Progress while checking Subsocial Spaces
+            return (
+                <Progress
+                    borderRadius="15px"
+                    background="second"
+                    size="xs"
+                    isIndeterminate
+                    colorScheme="purple"
+                />
+            )
+        }
+        case 5: {
+            //Energy or Tokens
+            return <></>
+        }
 
-      case 6: {
-         // Profile
-         return <></>
-      }
+        case 6: {
+            // Profile
+            return <ListItems list={spaces} setElement={setProfile} />
+        }
 
-      default: {
-         return (
-            <MainButton
-               text="Connect"
-               padding="15px"
-               bg="second"
-               hover="hover"
-               w="100%"
-               onClick={() => setStep(2)}
-            />
-         )
-      }
-   }
+        default: {
+            return (
+                <MainButton
+                    text="Connect"
+                    padding="15px"
+                    bg="second"
+                    hover="hover"
+                    w="100%"
+                    onClick={() => setStep(2)}
+                />
+            )
+        }
+    }
 }

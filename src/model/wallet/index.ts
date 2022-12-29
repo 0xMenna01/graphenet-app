@@ -1,8 +1,7 @@
 import type { Signer as InjectedSigner } from '@polkadot/api/types'
-import { u128 } from '@polkadot/types'
-import { SubmittableExtrinsic } from '@polkadot/api-base/types/submittable'
-import { ISubmittableResult } from '@polkadot/types/types'
-import { TRANSACTION } from '../model/transaction'
+import { StaticImageData } from 'next/image'
+
+export * from './BaseWallet'
 
 export type SubscriptionFn = (
    accounts: WalletAccount[] | undefined
@@ -18,12 +17,11 @@ export interface WalletLogoProps {
 export interface WalletAccount {
    address: string
    source: string
+   wallet: Wallet
+   signer: unknown
    name?: string
-   wallet?: Wallet
-   signer?: unknown
-   subBalance?: u128
-   ksmBalance?: u128
-   shidenBalance?: u128
+   image: StaticImageData
+   subBalance: string
 }
 
 interface WalletData {
@@ -55,15 +53,6 @@ interface WalletExtension {
    signer: InjectedSigner | undefined
 }
 
-interface Signer {
-   // Sign function
-   sign: (
-      tx: SubmittableExtrinsic<'promise', ISubmittableResult>,
-      address: string,
-      setStatus: (status: TRANSACTION) => void
-   ) => Promise<undefined | number>
-}
-
 interface Connector {
    enable: (dappName: string) => unknown
 
@@ -74,8 +63,4 @@ interface Connector {
    subscribeAccounts: (callback: SubscriptionFn) => unknown
 }
 
-export interface Wallet
-   extends WalletData,
-      WalletExtension,
-      Connector,
-      Signer {}
+export interface Wallet extends WalletData, WalletExtension, Connector {}

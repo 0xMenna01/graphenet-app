@@ -15,9 +15,9 @@ import {
 import Image from 'next/image'
 import styles from '../../../styles/NewProfile.module.css'
 import AccountIcon from '../../../../public/account.png'
-import { WalletAccount } from '../../../wallets/types'
 import { MainButton } from '../../button/MainButton'
 import { AccountInfo } from './AccountInfo'
+import { WalletAccount } from '../../../model/wallet'
 
 type SignedAccount = {
    account: WalletAccount
@@ -47,7 +47,7 @@ export const SignedInModal = ({
                borderColor: 'main',
                transform: 'scale(1.06)',
             }}
-            background="back"
+            background="none"
             onClick={onOpen}
          >
             <Box className={styles.walleticon}>
@@ -57,7 +57,7 @@ export const SignedInModal = ({
                   className={styles.walleticon}
                />
             </Box>
-            <Text fontSize="16px" opacity="0.6" fontWeight="600">
+            <Text fontSize="16px" opacity="0.9" fontWeight="600">
                {account.name}
             </Text>
          </Flex>

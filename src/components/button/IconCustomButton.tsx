@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react'
 import { MouseEventHandler, ReactNode } from 'react'
 
-type AddLinkProps = {
+type IconButtonProps = {
    className?: string
    text?: string
    children: ReactNode
@@ -17,7 +17,7 @@ export const IconCustomButton = ({
    bg,
    isDisabled,
    onClick,
-}: AddLinkProps) => {
+}: IconButtonProps) => {
    return (
       <Flex
          flexDir="column"

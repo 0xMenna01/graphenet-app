@@ -1,34 +1,65 @@
-import { SubsocialApi } from '@subsocial/api'
-import { ApiPromise } from '@polkadot/api'
 import { IpfsContent } from '@subsocial/api/substrate/wrappers'
-import { WalletAccount } from '../wallets/types'
-import { TRANSACTION } from '../model/transaction'
+import { SpaceStruct } from '@subsocial/api/types'
+import axios from 'axios'
+import CID from 'cids'
+import { INFURA_ID, INFURA_SECRET_KEY } from '../config/keys'
+import { SpaceAccount } from '../model/SpaceAccount'
+import { ApiConnect } from './ApiConnect'
 
 export const createProfile = async (
-   subApi: SubsocialApi,
-   subtrateApi: ApiPromise,
-   userName: string,
-   account: WalletAccount,
-   setStatus: (status: TRANSACTION) => void,
-   bio?: string | null,
-   avatar?: File | null
+    name: string,
+    bio?: string | null,
+    avatar?: File | null
 ) => {
-   let ipfsImageCid = null
-   if (avatar) {
-      ipfsImageCid = await subApi.ipfs.saveFile(avatar)
-   }
+    const api = await ApiConnect.getInstance().getApi()
+    const substrateApi = await ApiConnect.getInstance().getSubstrateApi()
+    let ipfsImageCid = null
+    if (avatar) {
+        ipfsImageCid = await api.ipfs.saveFile(avatar)
+    }
 
-   const cid = await subApi.ipfs.saveContent({
-      about: bio ? bio : null,
-      image: ipfsImageCid,
-      name: userName,
-      tags: null,
-   })
+    const profile = {
+        about: bio ? bio : null,
+        image: ipfsImageCid,
+        name: name,
+        tags: null,
+    }
 
-   const spaceTransaction = subtrateApi.tx.spaces.createSpace(
-      IpfsContent(cid),
-      null
-   )
+    const cid = await api.ipfs.saveFileToIpfs(JSON.stringify(profile))
 
-   return account.wallet?.sign(spaceTransaction, account.address, setStatus)
+    const spaceTransaction = substrateApi.tx.spaces.createSpace(
+        IpfsContent(cid),
+        null
+    )
+
+    return spaceTransaction
+}
+
+export const getSpaces = async (address: string) => {
+    const api = await ApiConnect.getInstance().getApi()
+    const spaceIds = await api.blockchain.spaceIdsByOwner(address)
+    const structs = await api.findSpaceStructs(spaceIds)
+
+    let spaces: SpaceAccount[] = []
+
+    structs.forEach(async (spaceStruct) => {
+        const { contentId, id } = spaceStruct
+        if (contentId) {
+            const content = await ApiConnect.getInstance()
+                .ipfsClient()
+                .getContent(contentId)
+
+            const json = JSON.stringify(content)
+            if (json) {
+                let space: SpaceAccount = JSON.parse(json)
+                space.image = ApiConnect.getInstance()
+                    .ipfsClient()
+                    .loadContent(space.image)
+                space.id = id
+                spaces.push(space)
+            }
+        }
+    })
+
+    return spaces
 }

@@ -1,4 +1,4 @@
-import { BaseDotsamaWallet } from '../base-wallet'
+import { BaseDotsamaWallet } from '../../../model/wallet'
 
 export class SubWallet extends BaseDotsamaWallet {
    extensionName = 'subwallet-js'

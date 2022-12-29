@@ -5,7 +5,6 @@ import { MainButton } from '../button/MainButton'
 import { MainHeading, SecondHeading } from '../heading/Headings'
 import { ManageLinksCard } from '../links/card/ManageLinksCard'
 import { AccountCard } from './AccountCard'
-import { LinksManager } from './LinksManager'
 
 export const ProfileSettings = () => {
    return (
