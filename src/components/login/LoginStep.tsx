@@ -7,6 +7,7 @@ import { MainButton } from '../button/MainButton'
 import { ListItems } from '../selection-list/ListItems'
 import WalletList from '../wallets/wallet-list/WalletsList'
 import { getSpaces } from '../../guicontroller'
+import { SpaceAccount } from '../../model/SpaceAccount'
 
 type StepProps = {
     step: number
@@ -25,7 +26,7 @@ export const LoginStep = ({ step, setStep }: StepProps) => {
     const fetchSpaces = async () => {
         const spaces = await getSpaces(account.address)
         setSpaces(spaces)
-        setStep(5)
+        setStep(6)
     }
 
     useEffect(() => {

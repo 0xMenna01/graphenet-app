@@ -17,7 +17,7 @@ export const SpacesContext = createContext<ContextType>({
 })
 
 export const SpacesProvider = ({ children }: Props) => {
-    const [spaces, setSpaces] = useState<SpaceAccount[]>([] as SpaceAccount[])
+    const [spaces, setSpaces] = useState<SpaceAccount[]>([])
 
     return (
         <SpacesContext.Provider value={{ spaces, setSpaces }}>

@@ -42,7 +42,7 @@ export const getSpaces = async (address: string) => {
 
     let spaces: SpaceAccount[] = []
 
-    structs.forEach(async (spaceStruct) => {
+    for (const spaceStruct of structs) {
         const { contentId, id } = spaceStruct
         if (contentId) {
             const content = await ApiConnect.getInstance()
@@ -51,15 +51,20 @@ export const getSpaces = async (address: string) => {
 
             const json = JSON.stringify(content)
             if (json) {
-                let space: SpaceAccount = JSON.parse(json)
-                space.image = ApiConnect.getInstance()
-                    .ipfsClient()
-                    .loadContent(space.image)
-                space.id = id
+                const { name, about, image } = JSON.parse(json)
+                const space: SpaceAccount = {
+                    name: name,
+                    id: id,
+                    about: about,
+                    image: ApiConnect.getInstance()
+                        .ipfsClient()
+                        .loadContent(image),
+                }
+
                 spaces.push(space)
             }
         }
-    })
+    }
 
     return spaces
 }

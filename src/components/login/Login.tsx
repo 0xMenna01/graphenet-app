@@ -27,11 +27,14 @@ const Login: NextPage = () => {
     const handleBackClick = () => {
         switch (step) {
             case 3: {
+                setStep(step - 1)
                 setAccount({} as WalletAccount)
+                break
             }
             case 5: {
                 setStep(step - 2)
                 setSpaces([])
+                break
             }
 
             default: {
@@ -100,21 +103,6 @@ const Login: NextPage = () => {
         }
     }
 
-    const Footer = () => {
-        return (
-            <ArrowBackIcon
-                boxSize={8}
-                color="hover"
-                _hover={{
-                    cursor: 'pointer',
-                    color: 'main',
-                    transform: 'scale(1.3)',
-                }}
-                onClick={handleBackClick}
-            />
-        )
-    }
-
     return (
         <Flex className={styles.page}>
             <Box className={styles.box} bg="linear">
@@ -127,7 +115,18 @@ const Login: NextPage = () => {
                 firstHeading={firstHeading()}
                 secondHeading={secondHeading()}
                 hasFooter={step > 2 && step != 4}
-                footer={<Footer />}
+                footer={
+                    <ArrowBackIcon
+                        boxSize={8}
+                        color="hover"
+                        _hover={{
+                            cursor: 'pointer',
+                            color: 'main',
+                            transform: 'scale(1.3)',
+                        }}
+                        onClick={handleBackClick}
+                    />
+                }
             >
                 <LoginStep step={step} setStep={setStep} />
             </MainCard>

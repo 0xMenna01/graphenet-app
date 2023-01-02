@@ -1,6 +1,6 @@
 import styles from '../../styles/App.module.css'
 import { Box, Text } from '@chakra-ui/react'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { MouseEventHandler } from 'react'
 
 type ListItems = {
@@ -18,6 +18,7 @@ export const ListItems = ({ list, setElement, onClick }: ListItems) => {
                 'Items elements must have a propery called name and image'
             )
         }
+
         return (
             <Box
                 background="second"
@@ -31,16 +32,13 @@ export const ListItems = ({ list, setElement, onClick }: ListItems) => {
                     transform: 'scale(1.02)',
                 }}
                 onClick={() => {
-                    if (onClick && setElement) {
-                        throw new Error(
-                            'Cannot pass both onClick and set function'
-                        )
-                    }
-                    onClick || setElement!(elem)
+                    setElement!(elem)
                 }}
             >
                 <Box className={styles.icon}>
                     <Image
+                        width={40}
+                        height={40}
                         src={image}
                         alt={name + ' Image'}
                         className={styles.icon}
